@@ -105,7 +105,6 @@ class Dropbox {
     }
 
     public function create_shared_link($dropbox_file_path = null){
-//        var_dump($dropbox_file_path); exit;
         $parameters = array(
             'path' => $dropbox_file_path
 //    'settings' => array(
@@ -166,8 +165,6 @@ class Dropbox {
     }
 
     public function upload_file($file_data = array()){
-//        $folder_name = '';
-//        $file_name = '';
 
         extract($file_data);
 
