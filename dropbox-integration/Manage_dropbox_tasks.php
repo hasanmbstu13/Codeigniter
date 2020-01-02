@@ -274,32 +274,12 @@ class Dropbox_upload extends CI_Controller {
                     return false;
                 }
 
-//                $pdf = new Pdf();
-
                 $this->_pdf->addPage(site_url() . "/report/{$this->_report_type}/print-report/{$this->_main_request_id}/img");
                 if (!$this->_pdf->saveAs($this->_pdf_file_path)) {
                     log_message('error', $this->_pdf->getError());
                     return false;
                 }
 
-                // take all request + report data of corresponding model
-//                $report_data = $request_query->row();
-//
-//                if($this->_report_type == 'bbb'){
-//                    $this->data['bbb_questions'] = $this->bbb_model->get_questions_by_id($this->_main_request_id);
-//                    $this->data['bbb_problems'] = $this->bbb_model->get_problems_by_id($this->_main_request_id);
-//                }
-//                if($this->_inspector_type){
-//                    if ($report_data->{$this->_inspector_type}) {
-//                        $this->data['tech_info'] = $this->user_model->get_tech_info($report_data->{$this->_inspector_type});
-//                    } else {
-//                        $this->data['tech_info'] = false;
-//                    }
-//                }
-//
-//                $this->data['is_special'] = $is_special;
-//                $this->data[$this->_data_type] = $report_data;
-//                $this->load->view('report'.self::DS.$this->_report_type.self::DS.'print', $this->data);
                 return true;
             }
         } else {
@@ -361,9 +341,6 @@ class Dropbox_upload extends CI_Controller {
         // Create Shared Link
         // PDF shared link
         $_pdf_shared_link_res = $this->dropbox->create_shared_link($this->_dropbox_pdf_file_path);
-//        var_dump($_pdf_shared_link_res);
-//
-//        exit;
         if($_pdf_shared_link_res['http_code'] == $this->_http_success_code){
             $_pdf_server_response = json_decode($_pdf_shared_link_res['response']);
             $this->_pdf_shared_link = $_pdf_server_response->url;
@@ -511,8 +488,6 @@ class Dropbox_upload extends CI_Controller {
                     'folder_name' => $destination_folder_path.self::DS
                 );
                 $pdf_upload_res = $this->dropbox->upload_file($upload_file_info);
-//                    var_dump($pdf_upload_res);
-//                    exit;
                 if($pdf_upload_res['http_code'] == $this->_http_success_code){
                     $this->_dropbox_pdf_file_path = $destination_folder_path.self::DS.$this->_claim_number.".pdf";
                 }else{
